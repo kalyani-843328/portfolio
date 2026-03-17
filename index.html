@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kalyani Singh — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #100f1a;
+    --bg3: #16142a;
+    --purple: #a259ff;
+    --purple-light: #c084fc;
+    --purple-dim: #7c3aed33;
+    --pink: #f472b6;
+    --cyan: #22d3ee;
+    --text: #f0eaff;
+    --muted: #8b7aa8;
+    --border: #2a2040;
+    --card: #13112099;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.4; }
+  .blob { position: fixed; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0; opacity: 0.12; }
+  .blob-1 { width: 600px; height: 600px; background: var(--purple); top: -200px; left: -200px; }
+  .blob-2 { width: 400px; height: 400px; background: var(--pink); bottom: 100px; right: -100px; }
+  .blob-3 { width: 300px; height: 300px; background: var(--cyan); top: 50%; left: 50%; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; background: rgba(10,10,15,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.3rem; background: linear-gradient(135deg, var(--purple), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.05em; transition: color 0.3s; text-transform: uppercase; }
+  .nav-links a:hover { color: var(--purple-light); }
+  section { position: relative; z-index: 1; }
+  #hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 2rem 4rem; max-width: 1100px; margin: 0 auto; }
+  .hero-content { max-width: 700px; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--purple-dim); border: 1px solid var(--purple); color: var(--purple-light); padding: 0.4rem 1rem; border-radius: 100px; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.5rem; animation: fadeUp 0.6s ease both; }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; background: var(--purple); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.5); } }
+  .hero-name { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 8vw, 6rem); font-weight: 800; line-height: 1; letter-spacing: -0.03em; margin-bottom: 1rem; animation: fadeUp 0.6s 0.1s ease both; }
+  .hero-name span { display: block; background: linear-gradient(135deg, var(--purple-light), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero-title { font-size: 1.1rem; color: var(--muted); margin-bottom: 1.5rem; font-weight: 300; line-height: 1.6; animation: fadeUp 0.6s 0.2s ease both; }
+  .hero-title strong { color: var(--text); font-weight: 500; }
+  .hero-desc { font-size: 1rem; color: var(--muted); line-height: 1.7; max-width: 500px; margin-bottom: 2.5rem; animation: fadeUp 0.6s 0.3s ease both; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.6s 0.4s ease both; }
+  .btn-primary { background: linear-gradient(135deg, var(--purple), #7c3aed); color: white; padding: 0.8rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; box-shadow: 0 0 30px rgba(162,89,255,0.3); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 50px rgba(162,89,255,0.5); }
+  .btn-outline { border: 1px solid var(--border); color: var(--text); padding: 0.8rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: all 0.3s; background: transparent; }
+  .btn-outline:hover { border-color: var(--purple); color: var(--purple-light); background: var(--purple-dim); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  #about { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .section-label { font-family: 'Syne', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--purple); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem; }
+  .section-label::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--purple); }
+  .section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 3rem; line-height: 1.1; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; font-size: 1rem; }
+  .about-text p strong { color: var(--text); }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; text-align: center; transition: border-color 0.3s, transform 0.3s; }
+  .stat-card:hover { border-color: var(--purple); transform: translateY(-4px); }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, var(--purple), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: block; }
+  .stat-label { color: var(--muted); font-size: 0.85rem; margin-top: 0.3rem; }
+  #skills { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
+  .skill-pill { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.2rem; display: flex; align-items: center; gap: 0.7rem; font-size: 0.9rem; font-weight: 500; transition: all 0.3s; cursor: default; }
+  .skill-pill:hover { border-color: var(--purple); background: var(--purple-dim); transform: translateY(-2px); }
+  .skill-icon { font-size: 1.3rem; }
+  #projects { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+  .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; transition: all 0.3s; position: relative; overflow: hidden; }
+  .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--purple), var(--pink)); opacity: 0; transition: opacity 0.3s; }
+  .project-card:hover { border-color: var(--purple); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(162,89,255,0.15); }
+  .project-card:hover::before { opacity: 1; }
+  .project-emoji { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+  .project-title { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.8rem; }
+  .project-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .tag { background: var(--purple-dim); color: var(--purple-light); border: 1px solid rgba(162,89,255,0.3); padding: 0.2rem 0.7rem; border-radius: 100px; font-size: 0.75rem; font-weight: 500; }
+  .project-links { display: flex; gap: 1rem; }
+  .project-link { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 0.3rem; transition: color 0.3s; }
+  .project-link:hover { color: var(--purple-light); }
+  #contact { padding: 6rem 2rem; max-width: 700px; margin: 0 auto; text-align: center; }
+  .contact-box { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 3rem; margin-top: 2rem; }
+  .contact-box p { color: var(--muted); line-height: 1.7; margin-bottom: 2rem; }
+  .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .contact-btn { display: flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.5rem; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; }
+  .contact-btn.github { background: #161b22; color: white; border: 1px solid #30363d; }
+  .contact-btn.github:hover { border-color: var(--purple); transform: translateY(-2px); }
+  .contact-btn.linkedin { background: #0a66c2; color: white; }
+  .contact-btn.linkedin:hover { opacity: 0.9; transform: translateY(-2px); }
+  .contact-btn.email { background: linear-gradient(135deg, var(--purple), #7c3aed); color: white; }
+  .contact-btn.email:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(162,89,255,0.4); }
+  footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); position: relative; z-index: 1; }
+  footer span { background: linear-gradient(135deg, var(--purple), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600; }
+  .divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); max-width: 1100px; margin: 0 auto; }
+  @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: 2rem; } .nav-links { display: none; } .hero-btns { flex-direction: column; } .btn-primary, .btn-outline { text-align: center; } }
+</style>
+</head>
+<body>
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+<nav>
+  <div class="nav-logo">KS</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Open to Internships & Fresher Jobs 🚀</div>
+    <h1 class="hero-name">Kalyani<span>Singh</span></h1>
+    <p class="hero-title"><strong>Frontend Developer</strong> &nbsp;·&nbsp; <strong>Blockchain Enthusiast</strong> &nbsp;·&nbsp; <strong>C++ Programmer</strong></p>
+    <p class="hero-desc">Computer Science student passionate about building impactful web applications and blockchain solutions. I love turning ideas into real, working products.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View My Projects →</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+<section id="about">
+  <p class="section-label">About Me</p>
+  <h2 class="section-title">Who I Am</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Hi! I'm <strong>Kalyani Singh</strong>, a Computer Science student with a strong passion for <strong>frontend development</strong> and <strong>blockchain technology</strong>.</p>
+      <p>I've worked on real-world projects including a <strong>blockchain-based medicine tracker</strong> and a <strong>certificate verification system</strong> — both solving real problems using decentralized technology.</p>
+      <p>I'm currently looking for <strong>internship opportunities</strong> where I can contribute, learn, and grow as a developer.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card"><span class="stat-num">4+</span><div class="stat-label">Projects Built</div></div>
+      <div class="stat-card"><span class="stat-num">3</span><div class="stat-label">Tech Domains</div></div>
+      <div class="stat-card"><span class="stat-num">1</span><div class="stat-label">Internship Done</div></div>
+      <div class="stat-card"><span class="stat-num">∞</span><div class="stat-label">Curiosity</div></div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+<section id="skills">
+  <p class="section-label">Skills</p>
+  <h2 class="section-title">What I Work With</h2>
+  <div class="skills-grid">
+    <div class="skill-pill"><span class="skill-icon">⚡</span> C++</div>
+    <div class="skill-pill"><span class="skill-icon">🌐</span> HTML5</div>
+    <div class="skill-pill"><span class="skill-icon">🎨</span> CSS3</div>
+    <div class="skill-pill"><span class="skill-icon">💛</span> JavaScript</div>
+    <div class="skill-pill"><span class="skill-icon">🔷</span> TypeScript</div>
+    <div class="skill-pill"><span class="skill-icon">⛓️</span> Blockchain</div>
+    <div class="skill-pill"><span class="skill-icon">🔥</span> Firebase</div>
+    <div class="skill-pill"><span class="skill-icon">🟢</span> Node.js</div>
+    <div class="skill-pill"><span class="skill-icon">🐱</span> Git/GitHub</div>
+    <div class="skill-pill"><span class="skill-icon">▲</span> Vercel</div>
+    <div class="skill-pill"><span class="skill-icon">🌿</span> Netlify</div>
+    <div class="skill-pill"><span class="skill-icon">🔨</span> Hardhat</div>
+  </div>
+</section>
+<div class="divider"></div>
+<section id="projects">
+  <p class="section-label">Projects</p>
+  <h2 class="section-title">Things I've Built</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <span class="project-emoji">🏥</span>
+      <div class="project-title">Blockchain Medicine Tracker</div>
+      <p class="project-desc">A decentralized system to track medicines across the supply chain, preventing counterfeit drugs using blockchain technology.</p>
+      <div class="project-tags"><span class="tag">JavaScript</span><span class="tag">Blockchain</span><span class="tag">Node.js</span></div>
+      <div class="project-links"><a href="https://github.com/kalyani-843328/blockchain-medicine-tracker" target="_blank" class="project-link">⬡ GitHub →</a></div>
+    </div>
+    <div class="project-card">
+      <span class="project-emoji">🎓</span>
+      <div class="project-title">CertiChain</div>
+      <p class="project-desc">A blockchain-based certificate verification system that eliminates fake certificates with tamper-proof, decentralized records.</p>
+      <div class="project-tags"><span class="tag">TypeScript</span><span class="tag">Blockchain</span><span class="tag">Hardhat</span><span class="tag">Firebase</span></div>
+      <div class="project-links">
+        <a href="https://github.com/kalyani-843328/certichain" target="_blank" class="project-link">⬡ GitHub →</a>
+        <a href="https://certichain-sooty.vercel.app" target="_blank" class="project-link">🔗 Live →</a>
+      </div>
+    </div>
+    <div class="project-card">
+      <span class="project-emoji">🌐</span>
+      <div class="project-title">Architecture Portfolio</div>
+      <p class="project-desc">A modern, responsive landing page for an architecture firm. Clean design with smooth layout and mobile-first approach.</p>
+      <div class="project-tags"><span class="tag">HTML5</span><span class="tag">CSS3</span></div>
+      <div class="project-links"><a href="https://github.com/kalyani-843328/landing-page" target="_blank" class="project-link">⬡ GitHub →</a></div>
+    </div>
+    <div class="project-card">
+      <span class="project-emoji">💻</span>
+      <div class="project-title">CodSoft Internship — C++</div>
+      <p class="project-desc">A collection of C++ projects built during CodSoft internship — Calculator, Number Guessing Game, and Tic-Tac-Toe.</p>
+      <div class="project-tags"><span class="tag">C++</span><span class="tag">OOP</span></div>
+      <div class="project-links"><a href="https://github.com/kalyani-843328/Codsoft-Intern" target="_blank" class="project-link">⬡ GitHub →</a></div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+<section id="contact">
+  <p class="section-label">Contact</p>
+  <h2 class="section-title">Let's Connect!</h2>
+  <div class="contact-box">
+    <p>I'm actively looking for <strong style="color:var(--text)">internship opportunities</strong> and <strong style="color:var(--text)">fresher jobs</strong>. Feel free to reach out!</p>
+    <div class="contact-links">
+      <a href="https://github.com/kalyani-843328" target="_blank" class="contact-btn github">🐱 GitHub</a>
+      <a href="https://linkedin.com/in/kalyani-singh-330707277" target="_blank" class="contact-btn linkedin">💼 LinkedIn</a>
+      <a href="mailto:kalyanisingh843328@gmail.com" class="contact-btn email">✉️ Email Me</a>
+    </div>
+  </div>
+</section>
+<footer>Designed & Built by <span>Kalyani Singh</span> · 2026</footer>
+</body>
+</html>
